@@ -1,20 +1,31 @@
-src: 9050
-node1: 0x47F609760479b807B6A50947bA4Cc5eB77c1faBF
-node2: 0x848c207af237545f3F1bC2653519479E5d83496b
-node3: 0xe0E893d1A9C5Da4c061e70dE0B2b7549b59CE539
+src: 12052
+alice: 0x77f2f6d30F36113F66aeC64487D9a6123ca7422d
+srcGateway: 0x1C338a92a6460a5EEF863EC9244dC8E7f5ed9173
+charlie: 0x2fC08891F3F629700115A82a7C2c9bA89dC03A63
 
-dst: 9060
-node1: 0xE7aF026555595c5F8dee7f764FDdebC4e1d8882b
-node2: 0x92a99D8560A90e82114c94a8e584711e930625F9
+geth --datadir alice --syncmode 'full' --port 30411 --http --http.addr 'localhost' --http.port 8501 --http.api 'personal,debug,eth,net,web3,txpool,miner' --authrpc.port 8551 --networkid 12052 --unlock 0x77f2f6d30F36113F66aeC64487D9a6123ca7422d --password "/home/shantu/IBC_Eth/src/alice/password.txt" --allow-insecure-unlock --nodiscover
 
-geth --datadir node1 --syncmode 'full' --port 30411 --http --http.addr 'localhost' --http.port 8501 --http.api 'personal,debug,eth,net,web3,txpool,miner' --authrpc.port 8551 --networkid 9050 --unlock 0x47F609760479b807B6A50947bA4Cc5eB77c1faBF --password "/home/shantanu/IBC/src/node1/password.txt" --allow-insecure-unlock --nodiscover
+geth --datadir srcGateway --syncmode 'full' --port 30412 --http --http.addr 'localhost' --http.port 8502 --http.api 'personal,debug,eth,net,web3,txpool,miner' --authrpc.port 8552 --networkid 12052 --unlock 0x1C338a92a6460a5EEF863EC9244dC8E7f5ed9173 --password "/home/shantu/IBC_Eth/src/srcGateway/password.txt" --allow-insecure-unlock --nodiscover
 
-geth --datadir node2 --syncmode 'full' --port 30412 --http --http.addr 'localhost' --http.port 8502 --http.api 'personal,debug,eth,net,web3,txpool,miner' --authrpc.port 8552 --networkid 9050 --unlock 0x848c207af237545f3F1bC2653519479E5d83496b --password "/home/shantanu/IBC/src/node2/password.txt" --allow-insecure-unlock --nodiscover
+geth --datadir charlie --syncmode 'full' --port 30413 --http --http.addr 'localhost' --http.port 8503 --http.api 'personal,debug,eth,net,web3,txpool,miner' --authrpc.port 8553 --networkid 12052 --unlock 0x2fC08891F3F629700115A82a7C2c9bA89dC03A63 --password "/home/shantu/IBC_Eth/src/charlie/password.txt" --allow-insecure-unlock --nodiscover
 
-geth --datadir node3 --syncmode 'full' --port 30413 --http --http.addr 'localhost' --http.port 8503 --http.api 'personal,debug,eth,net,web3,txpool,miner' --authrpc.port 8553 --networkid 9050 --unlock 0xe0E893d1A9C5Da4c061e70dE0B2b7549b59CE539 --password "/home/shantanu/IBC/src/node3/password.txt" --allow-insecure-unlock --nodiscover
+dst: 3546
+bob: 0x2412AE2a96bE6964A9bfBFE85e5522eEf0B6D456
+dstGateway: 0x6a78B1d47e276749F1909D708A7336ff5dDF90c2
+ellen: 0x40423e7fD6CF1eDCab31DF568852Af06Bb15bDc5
 
-geth --datadir node1 --syncmode 'full' --port 30511 --http --http.addr 'localhost' --http.port 8701 --http.api 'personal,debug,eth,net,web3,txpool,miner' --authrpc.port 8561 --networkid 9060 --unlock 0xE7aF026555595c5F8dee7f764FDdebC4e1d8882b --password "/home/shantanu/IBC/dst/node1/password.txt" --allow-insecure-unlock --nodiscover
+geth --datadir bob --syncmode 'full' --port 30511 --http --http.addr 'localhost' --http.port 8701 --http.api 'personal,debug,eth,net,web3,txpool,miner' --authrpc.port 8561 --networkid 3546 --unlock 0x2412AE2a96bE6964A9bfBFE85e5522eEf0B6D456 --password "/home/shantu/IBC_Eth/dst/bob/password.txt" --allow-insecure-unlock --nodiscover
 
-geth --datadir node2 --syncmode 'full' --port 30512 --http --http.addr 'localhost' --http.port 8702 --http.api 'personal,debug,eth,net,web3,txpool,miner' --authrpc.port 8562 --networkid 9060 --unlock 0x92a99D8560A90e82114c94a8e584711e930625F9 --password "/home/shantanu/IBC/dst/node2/password.txt" --allow-insecure-unlock --nodiscover
+geth --datadir dstGateway --syncmode 'full' --port 30512 --http --http.addr 'localhost' --http.port 8702 --http.api 'personal,debug,eth,net,web3,txpool,miner' --authrpc.port 8562 --networkid 3546 --unlock 0x6a78B1d47e276749F1909D708A7336ff5dDF90c2 --password "/home/shantu/IBC_Eth/dst/dstGateway/password.txt" --allow-insecure-unlock --nodiscover
+
+geth --datadir ellen --syncmode 'full' --port 30513 --http --http.addr 'localhost' --http.port 8703 --http.api 'personal,debug,eth,net,web3,txpool,miner' --authrpc.port 8563 --networkid 3546 --unlock 0x40423e7fD6CF1eDCab31DF568852Af06Bb15bDc5 --password "/home/shantu/IBC_Eth/dst/ellen/password.txt" --allow-insecure-unlock --nodiscover
+
+aux: 42338
+sAuxGateway: 0x11D345411026626070198480fFA0F89E34784181
+dAuxGateway: 0xF12729c6DDf04Ea7c7C2675B30fF9fCb3e9C7A2b
+
+geth --datadir sAuxGateway --syncmode 'full' --port 30611 --http --http.addr 'localhost' --http.port 8801 --http.api 'personal,debug,eth,net,web3,txpool,miner' --authrpc.port 8571 --networkid 42338 --unlock 0x11D345411026626070198480fFA0F89E34784181 --password "/home/shantu/IBC_Eth/aux/sAuxGateway/password.txt" --allow-insecure-unlock --nodiscover
+
+geth --datadir dAuxGateway --syncmode 'full' --port 30612 --http --http.addr 'localhost' --http.port 8802 --http.api 'personal,debug,eth,net,web3,txpool,miner' --authrpc.port 8572 --networkid 42338 --unlock 0xF12729c6DDf04Ea7c7C2675B30fF9fCb3e9C7A2b --password "/home/shantu/IBC_Eth/aux/dAuxGateway/password.txt" --allow-insecure-unlock --nodiscover
 
 

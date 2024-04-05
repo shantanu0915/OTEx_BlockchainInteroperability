@@ -68,3 +68,13 @@
 14:29:42.096992 db@open done T·252.859636ms
 15:59:40.905414 db@close closing
 15:59:40.905621 db@close done T·199.227µs
+=============== Apr 5, 2024 (IST) ===============
+22:41:34.759094 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+22:41:34.789730 version@stat F·[1 1] S·66KiB[3KiB 63KiB] Sc·[0.25 0.00]
+22:41:34.789842 db@open opening
+22:41:34.790029 journal@recovery F·1
+22:41:34.796741 journal@recovery recovering @16
+22:41:34.879945 memdb@flush created L0@18 N·175 S·9KiB "*]\xef..S3R,v1147":"Ց\xee..\x9c͈,v1152"
+22:41:34.886478 version@stat F·[2 1] S·76KiB[12KiB 63KiB] Sc·[0.50 0.00]
+22:41:34.970537 db@janitor F·5 G·0
+22:41:34.970571 db@open done T·180.701566ms

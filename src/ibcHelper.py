@@ -53,7 +53,6 @@ class Node:
         print("Is connected to ", self.ipc, ": ", self.w3.is_connected())
 
 
-
     def sendTransaction(self, fromAddr, toAddr, ibcMessage):
         transaction = {
             'from': fromAddr,
@@ -64,6 +63,25 @@ class Node:
         txHash = self.w3.eth.send_transaction(transaction)
         self.w3.eth.wait_for_transaction_receipt(txHash)
         return txHash.hex()
+    
+    def transactionListener(self):
+        currentBlockNumber = self.w3.eth.block_number
+        block = dict(self.w3.eth.get_block(currentBlockNumber))
+        while True:
+            try:
+                block = dict(self.w3.eth.get_block(currentBlockNumber))
+                if block and block.get("transactions"):
+                    for transaction in block['transactions']:
+                        txHash = transaction.hex()
+                        transaction = self.w3.eth.get_transaction(txHash)
+                        if transaction.to is not None and transaction.to.lower() == self.address.lower():
+                            data = pickle.loads(transaction["input"])
+                            return data
+                currentBlockNumber += 1
+            except Exception as e:
+                # print("No transaction found in block",e)
+                time.sleep(5)
+        return
 
     # def deployContract(self, contract_bytecode, contract_abi):
     #     contract = self.web3.eth.contract(abi=contract_abi, bytecode=contract_bytecode)

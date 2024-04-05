@@ -1,8 +1,32 @@
-=============== Apr 2, 2024 (IST) ===============
-15:37:35.681819 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
-15:37:35.750927 db@open opening
-15:37:35.758858 version@stat F·[] S·0B[] Sc·[]
-15:37:35.773990 db@janitor F·2 G·0
-15:37:35.774097 db@open done T·23.091148ms
-15:37:59.802909 db@close closing
-15:37:59.803055 db@close done T·141.714µs
+=============== Apr 5, 2024 (IST) ===============
+14:20:20.225639 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+14:20:20.296023 db@open opening
+14:20:20.297451 version@stat F·[] S·0B[] Sc·[]
+14:20:20.318825 db@janitor F·2 G·0
+14:20:20.318902 db@open done T·22.802714ms
+14:20:20.555635 db@close closing
+14:20:20.555662 db@close done T·26.186µs
+=============== Apr 5, 2024 (IST) ===============
+14:23:58.498386 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+14:23:58.498486 version@stat F·[] S·0B[] Sc·[]
+14:23:58.498499 db@open opening
+14:23:58.498546 journal@recovery F·1
+14:23:58.499754 journal@recovery recovering @1
+14:23:58.522124 memdb@flush created L0@2 N·628 S·52KiB "\x02d\xfc..\x19Ba,v434":"\xfe\x88\xcf..H\xef\xcc,v364"
+14:23:58.527845 version@stat F·[1] S·52KiB[52KiB] Sc·[0.25]
+14:23:58.614933 db@janitor F·3 G·0
+14:23:58.614996 db@open done T·116.482419ms
+14:29:05.386022 db@close closing
+14:29:05.386050 db@close done T·28µs
+=============== Apr 5, 2024 (IST) ===============
+14:29:48.851431 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+14:29:48.851568 version@stat F·[1] S·52KiB[52KiB] Sc·[0.25]
+14:29:48.851582 db@open opening
+14:29:48.851613 journal@recovery F·1
+14:29:48.853039 journal@recovery recovering @3
+14:29:48.869665 memdb@flush created L0@5 N·341 S·14KiB "Dat..ion,v631":"unc..own,v636"
+14:29:48.871189 version@stat F·[2] S·66KiB[66KiB] Sc·[0.50]
+14:29:48.960994 db@janitor F·4 G·0
+14:29:48.961083 db@open done T·109.484005ms
+15:59:41.894900 db@close closing
+15:59:41.894942 db@close done T·40.925µs

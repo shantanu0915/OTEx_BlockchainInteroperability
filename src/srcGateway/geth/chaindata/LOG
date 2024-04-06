@@ -59,3 +59,5 @@
 18:55:54.954220 table@remove removed @8
 18:55:54.954375 table@remove removed @5
 18:55:54.954497 table@remove removed @2
+22:31:49.731302 db@close closing
+22:31:49.731334 db@close done T·31.865µs

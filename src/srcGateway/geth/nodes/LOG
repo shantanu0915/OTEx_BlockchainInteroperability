@@ -40,3 +40,5 @@
 18:55:55.234912 version@stat F·[3] S·505B[505B] Sc·[0.75]
 18:55:55.423212 db@janitor F·5 G·0
 18:55:55.423331 db@open done T·246.810344ms
+22:31:49.731372 db@close closing
+22:31:49.731395 db@close done T·23.296µs

@@ -12,7 +12,7 @@ srcGateway.checkConnection()
 
 srcToDstSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 print("Source to Destination socket created")
-dstPort = 54321
+dstPort = 12345
 dstIP = '192.168.111.211'
 srcToDstSocket.connect((dstIP, dstPort))
 print("Connected to destination")
@@ -37,12 +37,59 @@ def onChainListener():
             ownershipCertificate=data.ownershipCertificate #Use the Lock Token Hash here
         )
         print("---- 6. OT Request to destination gateway ----")
+        print("From: Source Gateway  To: Destination Gateway")
         srcToDstSocket.send(pickle.dumps(OTRequestMessage))
 
 def offChainListener():
-    OTResponse = pickle.loads(srcToDstSocket.recv(16384))
-    print("---- 13. OTResponse received ----")
-    srcGateway.sendTransaction(OTResponse.recipientGWAddress, OTResponse.recipientAddress, OTResponse)
+    while True:
+        data = srcToDstSocket.recv(16384)
+        if len(data) == 0:
+            return
+        data = pickle.loads(data)
+        if(data.messageType == "OTAcceptResponse" or data.messageType == "OTRejectResponse"):
+            OTResponseTransaction = srcGateway.sendTransaction(data.recipientGWAddress, data.recipientAddress, data)
+            print("---- 13. OTResponse sent to Alice ----")
+            print("From: Source Gateway  To: Alice")
+            print("Transaction Hash: ", OTResponseTransaction)
+        elif(data.messageType == "OERequest"):
+            print("---- 5. OEResponse received ----")
+
+            print("---- 6. Signature Verificaton ----")
+            print("From: Source Gateway  To: Verify Signature SC")
+            print("Transaction Hash: ")
+
+            print("---- 8. Unlock Token ----")
+            print("From: Source Gateway  To: Token Locking SC")
+            print("Transaction Hash: ")
+
+            print("---- 9. Transfer Token to Charlie ----")
+            print("From: Source Gateway  To: Charlie")
+            print("Transaction Hash: ")
+
+            print("---- 10. Prepare OEResponse Message ----")
+            OEResponseMessage = ibcHelper.IBCMessage(
+                version=1,
+                messageType="OEResponse",
+                senderAddress=ibcHelper.charlieAddress,
+                recipientAddress=ibcHelper.bobAddress,
+                senderGWAddress=ibcHelper.srcGatewayAddress,
+                recipientGWAddress=ibcHelper.dstGatewayAddress,
+                tokenBID=data.tokenBID,
+                senderBID=data.senderBID,
+                recipientBID=data.recipientBID,
+                tokenValue=data.tokenValue,
+                ownershipCertificate=data.ownershipCertificate #Transaction hash for successful Token transfer
+            )
+
+            print("---- 11. OE Response to destination gateway ----")
+            print("From: Source Gateway  To: Destination Gateway")
+            srcToDstSocket.send(pickle.dumps(OEResponseMessage))
+            srcToDstSocket.close()
+            return
+        
+
+            
+
 
 if __name__ == "__main__":
 

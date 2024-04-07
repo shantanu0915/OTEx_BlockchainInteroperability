@@ -20,11 +20,14 @@ def onChainListener():
 if __name__ == "__main__":
 
     print("---- 1. Alice mints the tokens for OTEx ----")
+    print("From: Alice  To: Mint Token SC")
+    print("Transaction Hash: ")
 
-    print("---- 2. Alice locks the token onto the TLSC ----")
+    print("---- 2. Alice locks the token ----")
+    print("From: Alice  To: Lock Token SC")
+    print("Transaction Hash: ")
+
     #Transaction Hash (Lock Token Hash as Ownership Certificate) to be genrated after the smart contract call 
-
-    print("---- 3. OT Init transaction to source gateway ----")
 
     OTInitMessage = ibcHelper.IBCMessage(
         version=1,
@@ -41,7 +44,9 @@ if __name__ == "__main__":
     )
 
     OTInitTransaction = alice.sendTransaction(OTInitMessage.senderAddress, OTInitMessage.senderGWAddress, OTInitMessage)
-    print("OT Initiate Hash: ", OTInitTransaction)
+    print("---- 3. OT Init transaction to source gateway ----")
+    print("From: Alice  To: Source Gateway")
+    print("Transaction Hash: ", OTInitTransaction)
 
     onChainListenerThread = threading.Thread(target=onChainListener, args=())
     onChainListenerThread.start()
